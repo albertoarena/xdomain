@@ -248,47 +248,31 @@ for script in document.getElementsByTagName("script")
     for prefix in ['','data-']
       attr = script.getAttribute prefix+'slave'
       if attr
-        p = parseUrl attr
-        unless p
-          return 
-        s = {}
-        s[p.origin] = p.path
-        addSlaves s
-        break
-      # Attribute slaves
-      attr = script.getAttribute prefix+'slaves'
-      if attr
-        list = script.getAttribute prefix+'slaves'.split ","
-        s = {}
-        count = 0;
-        for i in list
-          p = parseUrl list[i]
+        if attr.indexOf ',' != -1
+          list = attr.split ","
+          s = {}
+          count = 0;
+          for i in list
+            p = parseUrl i
+            unless p
+              continue
+            s[p.origin] = p.path
+            count++
+          if count
+            addSlaves s
+          break
+        else
+          p = parseUrl attr
           unless p
-            continue
+            return
+          s = {}
           s[p.origin] = p.path
-          count++
-        if count
           addSlaves s
-        break
+          break
       attr = script.getAttribute prefix+'master'
       if attr
         m = {}
         m[attr] = /./
         addMasters m
-        break
-      # Attribute masters
-      attr = script.getAttribute prefix+'masters'
-      if attr
-        list = script.getAttribute prefix+'masters'.split ","
-        m = {}
-        count = 0;
-        for i in list
-          p = parseUrl list[i]
-          unless p
-            continue
-          m[p.origin] = p.path
-          count++
-        if count
-          addMasters m
         break
 

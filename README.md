@@ -137,9 +137,9 @@ If object contains:
   </script>
   ```
 
-  From vers. 0.5.8, you can also specify multiple slaves with the attribute "slaves", separating the URLs with a comma:
+  From vers. 0.5.8, you can also specify multiple slaves with the attribute "slave", separating the URLs with a comma:
   ```html
-  <script src="/dist/0.5/xdomain.min.js" slaves="http://xyz.example.com/proxy.html,http://ghi.example.com/proxy.html"></script>
+  <script src="/dist/0.5/xdomain.min.js" slave="http://xyz.example.com/proxy.html,http://ghi.example.com/proxy.html"></script>
   ```
 
 * ### `masters`
