@@ -659,7 +659,7 @@ for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
       }
       attr = script.getAttribute(prefix + 'slaves');
       if (attr) {
-        list = script.getAttribute(prefix + 'slaves'.split(""));
+        list = script.getAttribute(prefix + 'slaves'.split(","));
         s = {};
         count = 0;
         for (_l = 0, _len3 = list.length; _l < _len3; _l++) {
@@ -685,7 +685,7 @@ for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
       }
       attr = script.getAttribute(prefix + 'masters');
       if (attr) {
-        list = script.getAttribute(prefix + 'masters'.split(""));
+        list = script.getAttribute(prefix + 'masters'.split(","));
         m = {};
         count = 0;
         for (_m = 0, _len4 = list.length; _m < _len4; _m++) {
