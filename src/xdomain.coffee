@@ -255,8 +255,40 @@ for script in document.getElementsByTagName("script")
         s[p.origin] = p.path
         addSlaves s
         break
+      # Attribute slaves
+      attr = script.getAttribute prefix+'slaves'
+      if attr
+        list = script.getAttribute prefix+'slaves'.split ""
+        s = {}
+        count = 0;
+        for i in list
+          p = parseUrl list[i]
+          unless p
+            continue
+          s[p.origin] = p.path
+          count++
+        if count
+          addSlaves s
+        break
       attr = script.getAttribute prefix+'master'
       if attr
         m = {}
         m[attr] = /./
         addMasters m
+        break
+      # Attribute masters
+      attr = script.getAttribute prefix+'masters'
+      if attr
+        list = script.getAttribute prefix+'masters'.split ""
+        m = {}
+        count = 0;
+        for i in list
+          p = parseUrl list[i]
+          unless p
+            continue
+          m[p.origin] = p.path
+          count++
+        if count
+          addMasters m
+        break
+

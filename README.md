@@ -137,6 +137,11 @@ If object contains:
   </script>
   ```
 
+  From vers. 0.5.8, you can also specify multiple slaves with the attribute "slaves", separating the URLs with a comma:
+  ```html
+  <script src="/dist/0.5/xdomain.min.js" slaves="http://xyz.example.com/proxy.html,http://ghi.example.com/proxy.html"></script>
+  ```
+
 * ### `masters`
 
   Then `xdomain` will load as a slave
@@ -166,7 +171,7 @@ If object contains:
     });
   </script>
   ```
-  
+
   Therefore, you could allow ALL domains with the following `proxy.html`:
   ```html
   <script src="/dist/0.5/xdomain.min.js" master="*"></script>

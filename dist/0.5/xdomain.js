@@ -1,4 +1,4 @@
-// XDomain - v0.5.7 - https://github.com/jpillora/xdomain
+// XDomain - v0.5.8 - https://github.com/jpillora/xdomain
 // Jaime Pillora <dev@jpillora.com> - MIT Copyright 2013
 (function(window,document,undefined) {
 // XHook - v1.0.6 - https://github.com/jpillora/xhook
@@ -338,7 +338,7 @@ window.XMLHttpRequest = function() {
 window.xhook = xhook;
 }(window,document));
 'use strict';
-var CHECK_INTERVAL, COMPAT_VERSION, Frame, addMasters, addSlaves, attr, currentOrigin, feature, getMessage, guid, m, masters, onMessage, p, parseUrl, prefix, s, script, setMessage, setupReceiver, setupSender, slaves, toRegExp, warn, xdomain, _i, _j, _k, _len, _len1, _len2, _ref, _ref1, _ref2;
+var CHECK_INTERVAL, COMPAT_VERSION, Frame, addMasters, addSlaves, attr, count, currentOrigin, feature, getMessage, guid, i, list, m, masters, onMessage, p, parseUrl, prefix, s, script, setMessage, setupReceiver, setupSender, slaves, toRegExp, warn, xdomain, _i, _j, _k, _l, _len, _len1, _len2, _len3, _len4, _m, _ref, _ref1, _ref2;
 
 currentOrigin = location.protocol + '//' + location.host;
 
@@ -657,11 +657,50 @@ for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
         addSlaves(s);
         break;
       }
+      attr = script.getAttribute(prefix + 'slaves');
+      if (attr) {
+        list = script.getAttribute(prefix + 'slaves'.split(""));
+        s = {};
+        count = 0;
+        for (_l = 0, _len3 = list.length; _l < _len3; _l++) {
+          i = list[_l];
+          p = parseUrl(list[i]);
+          if (!p) {
+            continue;
+          }
+          s[p.origin] = p.path;
+          count++;
+        }
+        if (count) {
+          addSlaves(s);
+        }
+        break;
+      }
       attr = script.getAttribute(prefix + 'master');
       if (attr) {
         m = {};
         m[attr] = /./;
         addMasters(m);
+        break;
+      }
+      attr = script.getAttribute(prefix + 'masters');
+      if (attr) {
+        list = script.getAttribute(prefix + 'masters'.split(""));
+        m = {};
+        count = 0;
+        for (_m = 0, _len4 = list.length; _m < _len4; _m++) {
+          i = list[_m];
+          p = parseUrl(list[i]);
+          if (!p) {
+            continue;
+          }
+          m[p.origin] = p.path;
+          count++;
+        }
+        if (count) {
+          addMasters(m);
+        }
+        break;
       }
     }
   }
